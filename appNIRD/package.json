@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.18"
+  },
+  "dependencies": {
+    "babylonjs": "^8.40.0",
+    "tree": "^0.1.3"
+  },
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css",
+    "watch:css": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  }
+}
