@@ -1,0 +1,243 @@
+{% extends "base.html" %} 
+{% block title %}Installation LINUX Interactive{% endblock %} 
+{% block content %}
+
+<style>
+@keyframes pac-run {
+  0% { left: -90px; transform: translateY(-50%); }
+  100% { left: calc(100% + 90px); transform: translateY(-50%); }
+}
+
+.pacman-runner {
+  width: 72px;
+  height: 72px;
+  animation: pac-run 5.5s linear infinite;
+}
+
+@keyframes link-walk {
+  0% { left: -70px; transform: translateY(-50%); }
+  100% { left: calc(100% + 70px); transform: translateY(-50%); }
+}
+
+.link-runner {
+  width: 56px;
+  height: 56px;
+  animation: link-walk 8s linear infinite;
+}
+
+.sonic-stack img {
+  transition: opacity 0.35s ease;
+}
+
+input#iso-downloaded:checked ~ .sonic-stack .waiting {
+  opacity: 0;
+}
+
+input#iso-downloaded:checked ~ .sonic-stack .confirmed {
+  opacity: 1;
+}
+</style>
+
+<div class="rounded-lg bg-slate-900/80 p-6 border border-slate-700 shadow-lg">
+  <h1 class="text-2xl font-bold text-emerald-200 mb-4">
+    Guide d'installation de la distribution Linux NIRD
+  </h1>
+
+  <div class="mb-5">
+    <p class="text-sky-200 font-semibold mb-2">Prérequis</p>
+    <ul class="text-slate-100 space-y-1 list-disc list-inside">
+      <li>Un PC sous Linux, Windows ou macOS</li>
+      <li>Clé USB ou machine virtuelle pour tester l'ISO</li>
+      <li>Connexion internet pour le téléchargement</li>
+    </ul>
+        <div class="mt-4 rounded-lg overflow-hidden border border-blue-300 bg-blue-500/30 relative h-28">
+      <img src="{{ url_for('static', filename='images/pacman_eating.gif') }}" 
+           alt="Animation Pacman" 
+          class="pacman-runner absolute left-0 top-1/2" />
+    </div>
+    
+  </div>
+
+  <p class="text-amber-200 mb-3 font-semibold">
+    Étape 1 : Téléchargement de l'ISO
+  </p>
+  <p class="text-slate-100 mb-4">
+    Cliquez sur le lien ci-dessous pour télécharger l'image ISO de la
+    distribution Linux NIRD. Une fois le téléchargement terminé, cochez la case
+    correspondante pour passer à l'étape suivante.
+  </p>
+  
+  <div class="mb-4">
+     <a href="https://maths-code.fr/iso/NIRD-2025.iso" 
+       class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition inline-block shadow"
+       download>
+      📥 Télécharger l'ISO
+    </a>
+  </div>
+  
+  <div class="flex items-center gap-3">
+    <input type="checkbox" id="iso-downloaded" 
+           class="peer w-5 h-5 text-purple-600 rounded focus:ring-purple-500">
+    <label for="iso-downloaded" class="text-slate-100 cursor-pointer">
+      J'ai téléchargé l'ISO
+    </label>
+    <div class="sonic-stack relative w-12 h-12">
+      <img src="{{ url_for('static', filename='images/sonic_waiting.gif') }}" 
+        alt="Statut téléchargement" 
+        class="waiting absolute inset-0 w-12 h-12 rounded opacity-100">
+      <img src="{{ url_for('static', filename='images/sonic_finger.gif') }}" 
+        alt="Téléchargement confirmé" 
+        class="confirmed absolute inset-0 h-12 w-12 rounded object-contain opacity-0">
+    </div>
+  </div>
+
+  <div class="mt-4 rounded-lg bg-slate-800/70 border border-slate-700 p-4 space-y-2">
+    <p class="font-semibold text-amber-200">Mini quiz étape 1</p>
+    <p class="text-slate-100">À quoi sert l'ISO que tu viens de télécharger ?</p>
+    <div class="flex flex-wrap gap-2">
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz1" data-correct="false">À regarder comme un film</button>
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz1" data-correct="true">À flasher sur la clé USB pour installer NIRD</button>
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz1" data-correct="false">À graver sur un CD audio</button>
+    </div>
+    <p id="quiz1" class="text-sm text-slate-300"></p>
+  </div>
+
+  <div class="mt-8 space-y-3 text-slate-100">
+    <p class="font-semibold text-lg text-amber-200">
+      Étape 2 : Créer la clé USB bootable avec balenaEtcher
+    </p>
+    <ol class="list-decimal list-inside space-y-2">
+      <li>Télécharge balenaEtcher : <a class="underline font-semibold" href="https://etcher.balena.io/" target="_blank">etcher.balena.io</a></li>
+      <li>Branche une clé USB (8 Go minimum).</li>
+      <li>Ouvre Etcher → "Flash from file" → sélectionne l'ISO NIRD.</li>
+      <li>"Select target" → choisis ta clé USB.</li>
+      <li>"Flash" → attends la fin → éjecte la clé en toute sécurité.</li>
+    </ol>
+
+    <div class="mt-4 rounded-lg bg-slate-800/70 border border-slate-700 p-4 space-y-2">
+      <p class="font-semibold text-amber-200">Mini quiz étape 2</p>
+      <p class="text-slate-100">Avec balenaEtcher, quelle est la bonne séquence ?</p>
+      <div class="flex flex-wrap gap-2">
+        <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz2" data-correct="false">Select target → Flash from file → Flash</button>
+        <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz2" data-correct="true">Flash from file → Select target → Flash</button>
+        <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz2" data-correct="false">On clique sur « Auto » et on attend</button>
+      </div>
+      <p id="quiz2" class="text-sm text-slate-300"></p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <div class="rounded-lg bg-slate-800/70 border border-slate-700 p-4">
+        <p class="font-semibold mb-2 text-sky-200">Linux</p>
+        <ul class="list-disc list-inside space-y-1 text-slate-100">
+          <li>Télécharge l'AppImage depuis le site.</li>
+          <li>Rends-le exécutable : <code class="bg-slate-700 px-1 rounded text-sky-100">chmod +x balenaEtcher-*.AppImage</code></li>
+          <li>Lance-le : <code class="bg-slate-700 px-1 rounded text-sky-100">./balenaEtcher-*.AppImage</code></li>
+          <li>Si une invite demande les droits admin pour écrire sur l'USB, accepte.</li>
+        </ul>
+      </div>
+      <div class="rounded-lg bg-slate-800/70 border border-slate-700 p-4">
+        <p class="font-semibold mb-2 text-sky-200">macOS</p>
+        <ul class="list-disc list-inside space-y-1 text-slate-100">
+          <li>Télécharge le .dmg depuis le site.</li>
+          <li>Ouvre le .dmg et glisse balenaEtcher dans Applications.</li>
+          <li>Au premier lancement : clic droit → "Ouvrir" pour passer Gatekeeper.</li>
+          <li>Autorise l'accès au volume USB si demandé.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 rounded-lg overflow-hidden border border-green-300 bg-green-500/30 relative h-24">
+      <img src="{{ url_for('static', filename='images/link_walking.gif') }}" 
+           alt="Animation Link" 
+           class="link-runner absolute left-0 top-1/2" />
+    </div>
+  <div class="mt-8 space-y-3 text-slate-100">
+    <p class="font-semibold text-lg text-amber-200">
+      Étape 3 : Démarrer sur la clé USB (Boot Menu)
+    </p>
+    <ol class="list-decimal list-inside space-y-2">
+      <li>Insère la clé USB NIRD dans le PC éteint.</li>
+      <li>Allume le PC et appuie plusieurs fois sur la touche du Boot Menu.</li>
+      <li>Dans le menu, choisis la clé USB comme périphérique de démarrage.</li>
+      <li>Valide (Entrée) et laisse le PC démarrer sur la clé.</li>
+    </ol>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <div class="rounded-lg bg-slate-800/70 border border-slate-700 p-4">
+        <p class="font-semibold mb-2 text-sky-200">Raccourcis Boot Menu fréquents</p>
+        <ul class="list-disc list-inside space-y-1 text-slate-100">
+          <li>HP / Dell : <code class="bg-slate-700 px-1 rounded text-sky-100">F9</code> ou <code class="bg-slate-700 px-1 rounded text-sky-100">F12</code></li>
+          <li>Lenovo : <code class="bg-slate-700 px-1 rounded text-sky-100">F12</code></li>
+          <li>ASUS / Acer : <code class="bg-slate-700 px-1 rounded text-sky-100">F8</code> ou <code class="bg-slate-700 px-1 rounded text-sky-100">F12</code></li>
+          <li>MSI : <code class="bg-slate-700 px-1 rounded text-sky-100">F11</code></li>
+          <li>Surface / Mac (Intel) : maintenir <code class="bg-slate-700 px-1 rounded text-sky-100">Option</code> (⌥) au démarrage</li>
+        </ul>
+      </div>
+      <div class="rounded-lg bg-slate-800/70 border border-slate-700 p-4">
+        <p class="font-semibold mb-2 text-sky-200">Si le Boot Menu ne s'affiche pas</p>
+        <ul class="list-disc list-inside space-y-1 text-slate-100">
+          <li>Éteins complètement, re-teste en martelant la touche dès l'allumage.</li>
+          <li>Vérifie l'ordre de boot dans le BIOS/UEFI et place l'USB en premier.</li>
+          <li>Sur certains BIOS : désactive Secure Boot si l'USB n'apparaît pas.</li>
+          <li>Utilise un autre port USB (privilégie USB-A, pas de hub).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 rounded-lg bg-slate-800/70 border border-slate-700 p-4 space-y-2">
+    <p class="font-semibold text-amber-200">Mini quiz étape 3</p>
+    <p class="text-slate-100">Quelle action clé pour démarrer sur l'USB ?</p>
+    <div class="flex flex-wrap gap-2">
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz3" data-correct="false">Éteindre le Wi-Fi</button>
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz3" data-correct="true">Ouvrir le Boot Menu et choisir la clé USB</button>
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz3" data-correct="false">Débrancher le chargeur</button>
+    </div>
+    <p id="quiz3" class="text-sm text-slate-300"></p>
+  </div>
+
+
+  <div class="mt-8 space-y-3 text-slate-100">
+    <p class="font-semibold text-lg text-amber-200">
+      Étape 4 : Installer et profiter de Linux NIRD
+    </p>
+    <p class="text-slate-100">
+      Suivez les instructions de l’installateur : choisissez la langue, le clavier, le disque cible et laissez l’installation se terminer. Une fois le processus fini, retirez la clé USB si demandé, redémarrez et profitez d’un OS opérationnel. Bonne utilisation du Linux NIRD !
+    </p>
+  </div>
+
+  <div class="mt-4 rounded-lg bg-slate-800/70 border border-slate-700 p-4 space-y-2">
+    <p class="font-semibold text-amber-200">Mini quiz étape 4</p>
+    <p class="text-slate-100">Après l'installation terminée, que fais-tu ?</p>
+    <div class="flex flex-wrap gap-2">
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz4" data-correct="false">Formater immédiatement le disque</button>
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz4" data-correct="true">Retirer la clé si demandé, redémarrer et profiter</button>
+      <button class="quiz-btn bg-slate-700 hover:bg-slate-600 text-white text-sm px-3 py-1 rounded transition" data-target="quiz4" data-correct="false">Débrancher le PC sans redémarrer</button>
+    </div>
+    <p id="quiz4" class="text-sm text-slate-300"></p>
+  </div>
+
+  <div class="mt-8 flex justify-center">
+    <img src="{{ url_for('static', filename='images/lugia.gif') }}" 
+         alt="Lugia conclusion" 
+         class="rounded-lg max-w-md w-full" />
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.quiz-btn');
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = document.getElementById(btn.dataset.target);
+          if (!target) return;
+          const isCorrect = btn.dataset.correct === 'true';
+          target.textContent = isCorrect ? '✅ Bien vu !' : '❌ Pas tout à fait, réessaie.';
+          target.classList.remove('text-emerald-300', 'text-rose-300');
+          target.classList.add(isCorrect ? 'text-emerald-300' : 'text-rose-300');
+        });
+      });
+    });
+  </script>
+</div>
+{% endblock %}
