@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+{% block title %}Accueil - Démarche NIRD{% endblock %} 
+{% block content %}
+
+<div class="rounded-lg bg-slate-900/80 p-8 border border-slate-700 shadow-lg space-y-6">
+  <h1 class="text-3xl font-bold text-emerald-200 mb-4">
+    Bienvenue sur le site de la Démarche NIRD
+  </h1>
+  
+  <p class="text-lg text-sky-200 font-semibold">
+    Pour un numérique libre et écocitoyen dans les établissements scolaires !
+  </p>
+
+  <div class="text-slate-100 space-y-4">
+    <p>
+      À l'heure où la fin du support de Windows 10 nous rappelle notre dépendance technologique et nous oblige à faire des choix, un collectif enseignant issu de la forge des communs numériques éducatifs invite les établissements scolaires et les collectivités qui les accompagnent à s'engager progressivement vers un Numérique qui soit davantage <span class="font-bold text-emerald-300">Inclusif, Responsable et Durable</span>, en rejoignant la « démarche NIRD ».
+    </p>
+
+    <div class="bg-slate-800/70 border border-slate-600 rounded-lg p-5 space-y-3">
+      <p class="font-semibold text-amber-200 text-lg">Les trois piliers de la démarche NIRD :</p>
+      <ul class="list-disc list-inside space-y-2 text-slate-100">
+        <li><span class="font-semibold text-sky-300">Inclusion</span> : accès équitable au numérique, réduction de la fracture numérique…</li>
+        <li><span class="font-semibold text-sky-300">Responsabilité</span> : usage raisonné et réflexif de technologies souveraines et respectueuses des données personnelles…</li>
+        <li><span class="font-semibold text-sky-300">Durabilité</span> : lutte contre l'obsolescence programmée par le choix de Linux pour l'équipement, maîtrise des coûts…</li>
+      </ul>
+    </div>
+
+    <p>
+      Condition nécessaire mais non suffisante, et parti-pris assumé, l'adoption concrète et graduelle du système d'exploitation libre <span class="font-bold text-emerald-300">Linux</span> au sein de l'établissement scolaire constitue à la fois le socle et le premier levier de cette démarche. Pour équiper le parc informatique (mais aussi les familles ou les écoles aux alentours) en y menant notamment des projets de reconditionnement si possible avec les élèves.
+    </p>
+
+    <p>
+      Cette démarche s'inspire directement de la réussite du projet d'établissement NIRD du lycée Carnot de Bruay-la-Buissière qu'elle souhaite voir essaimer et passer à l'échelle, en fédérant les initiatives existantes et en suscitant de nouvelles initiatives parmi les écoles, les collèges et les lycées français.
+    </p>
+
+    <div class="bg-slate-800/70 border border-purple-600 rounded-lg p-5 space-y-3">
+      <p class="font-semibold text-purple-300 text-lg">Pour participer :</p>
+      <ul class="list-disc list-inside space-y-2 text-slate-100">
+        <li>Rendez-vous sur notre <a href="https://tchap.gouv.fr" class="underline text-purple-400 hover:text-purple-300" target="_blank">forum Tchap</a></li>
+        <li>Consultez notre <a href="/install" class="underline text-purple-400 hover:text-purple-300">tutoriel d'installation Linux NIRD</a></li>
+        <li>Découvrez <a href="/pourquoi" class="underline text-purple-400 hover:text-purple-300">pourquoi cette démarche</a></li>
+      </ul>
+    </div>
+
+    <p class="text-sm text-slate-400 italic mt-6">
+      Cette démarche spontanée n'a pas, pour le moment, de reconnaissance ou légitimité officielle. Elle provient du terrain et est dictée par un certain sentiment d'urgence. Nous mesurons l'ampleur de la tâche et rien ne pourra se faire à terme sans la mobilisation de nombreux acteurs, des enseignants jusqu'aux collectivités, et le soutien de l'institution.
+    </p>
+  </div>
+</div>
+
+{% endblock %}
