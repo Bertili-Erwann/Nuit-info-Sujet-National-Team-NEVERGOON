@@ -8,3 +8,16 @@ pip install -r requirements.txt
 cd appNIRD
 npm install
 ```
+
+### Démarrer le site internet
+
+#### Page principale
+```
+flask run
+```
+
+#### Visualisateur audio
+```
+cd visualisation-audio
+npm run dev
+```
